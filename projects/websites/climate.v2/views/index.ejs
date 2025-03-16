@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisar Clima</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="history">
+        <div class="header-history">
+            <div class="content-history">
+                <h2>Histórico de Pesquisas</h2>
+                <table id="content">
+                    <!-- O histórico será adicionado aqui dinamicamente -->
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h1>Pesquisar Clima</h1>
+            <input type="text" id="city" class="input" placeholder="Digite o nome da cidade">
+            <button class="button" onclick="fetchWeather()">Pesquisar</button>
+            <p id="error" class="error"></p>
+        </div>
+        <div id="weather" class="weather-info"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
