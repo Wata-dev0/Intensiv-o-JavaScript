@@ -16,7 +16,7 @@ const fetchWeather = async (city = '') => {
             throw new Error('Cidade não encontrada');
         }
         const data = await response.json();
-        saveSearchHistory(cityName);
+        saveSearchHistory(cityName, data.main.temp);
         const weather = `
         <div id="table">
             <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Clima">
@@ -41,25 +41,25 @@ const fetchWeather = async (city = '') => {
         weatherElement.style.display = 'none';
     }
 };
-const saveSearchHistory = (city) => {
+
+const saveSearchHistory = (city, temp) => {
     let history = JSON.parse(localStorage.getItem('searchHistory')) || [];
-    if (!history.includes(city)) {
-        history.push(city);
+    if (!history.find(item => item.city === city)) {
+        history.push({ city, temp });
         localStorage.setItem('searchHistory', JSON.stringify(history));
     }
 };
 const updateHistory = () => {
-    const historyTable = document.getElementById('content');
-    let history = JSON.parse(localStorage.getItem('searchHistory')) || [];
-    historyTable.innerHTML = '';
-    history.forEach(city => {
+    const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    const table = document.getElementById('content');
+    table.innerHTML = '';
+    history.forEach(item => {
         const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.textContent = city;
-        row.appendChild(cell);
-        historyTable.appendChild(row);
+        row.innerHTML = `
+        <td>${item.city}</td>
+        <td>${item.temp}°C</td>
+        `;
+        table.appendChild(row);
     });
 };
-
-// Atualizar o histórico quando a página for carregada
 window.onload = updateHistory;
