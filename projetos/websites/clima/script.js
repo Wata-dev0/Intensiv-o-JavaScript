@@ -1,5 +1,3 @@
-
-
 function ftoc() {
 
     const tmp = document.getElementById("temphere").textContent; 
@@ -10,5 +8,6 @@ function ftoc() {
         : `${((value - 32) * 5/9).toFixed(1)}°C`;
 }
 
-
-
+function find(){
+    
+}
